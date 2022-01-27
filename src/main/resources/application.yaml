@@ -7,3 +7,7 @@ spring:
     password: postgres
   jpa:
     generate-ddl: true
+
+jwt:
+  secret: secret
+  expiration: 86400000

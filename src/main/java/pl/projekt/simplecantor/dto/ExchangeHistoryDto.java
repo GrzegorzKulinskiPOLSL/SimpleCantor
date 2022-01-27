@@ -2,7 +2,7 @@ package pl.projekt.simplecantor.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import pl.projekt.simplecantor.utility.TypeOperation;
+import pl.projekt.simplecantor.dto.enums.TypeOperation;
 
 import java.time.LocalDate;
 

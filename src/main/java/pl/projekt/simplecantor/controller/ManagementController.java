@@ -3,6 +3,7 @@ package pl.projekt.simplecantor.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.projekt.simplecantor.database.entity.ConverterParameter;
 import pl.projekt.simplecantor.database.entity.Currency;
@@ -25,11 +26,13 @@ public class ManagementController {
     private final ConverterService converterService;
 
     @GetMapping("/")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Currency> getAllCurrencies() {
         return currencyService.getAllCurrency();
     }
 
     @PostMapping("add")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> addCurrency(@RequestBody CurrencyDto dto) {
         String currencyCode = currencyService.addCurrency(dto);
 
@@ -37,12 +40,14 @@ public class ManagementController {
     }
 
     @PostMapping("/addAllRateApi")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> addAllRateFromApi() {
         exchangeRateService.addCurrentRateFromApi();
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/{currencyCode}/addRate")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public ResponseEntity<String> addRate(
             @PathVariable String currencyCode, @RequestBody ExchangeRateDto dto) {
@@ -53,6 +58,7 @@ public class ManagementController {
     }
 
     @PostMapping("/{currencyCode}/setParameters")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public ResponseEntity<String> setParameters(
             @PathVariable String currencyCode, @RequestBody ConverterParameter converterParameters) {
@@ -62,6 +68,7 @@ public class ManagementController {
     }
 
     @GetMapping("/currenciesParameters")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<ConverterParameter> getAllConverterValue() {
         return converterService.getAllSetParameters();
     }

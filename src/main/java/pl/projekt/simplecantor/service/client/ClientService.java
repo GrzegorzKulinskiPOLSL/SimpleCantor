@@ -12,7 +12,7 @@ import pl.projekt.simplecantor.dto.CurrencyCurrentRate;
 import pl.projekt.simplecantor.dto.ExchangeHistoryDto;
 import pl.projekt.simplecantor.dto.ExchangeRequestDto;
 import pl.projekt.simplecantor.dto.ExchangeResultDto;
-import pl.projekt.simplecantor.utility.TypeOperation;
+import pl.projekt.simplecantor.dto.enums.TypeOperation;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,6 +1,7 @@
 package pl.projekt.simplecantor.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.projekt.simplecantor.database.entity.ExchangeHistory;
 import pl.projekt.simplecantor.dto.CurrencyCurrentRate;
@@ -24,6 +25,7 @@ class ClientController {
     public List<CurrencyCurrentRate> getAllCurrency() { return clientService.showAllCurrency(); }
 
     @PostMapping("{currencyCode}")
+    @PreAuthorize("hasRole('USER')")
     @ResponseBody
     public ExchangeResultDto exchange(@PathVariable String currencyCode,
                                       @RequestBody ExchangeRequestDto dto) {
@@ -31,6 +33,7 @@ class ClientController {
     }
 
     @GetMapping("history")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @ResponseBody
     public List<ExchangeHistoryDto> getHistory() {
         return clientService.getHistory();

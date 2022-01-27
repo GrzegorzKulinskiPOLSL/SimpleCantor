@@ -1,10 +1,8 @@
 package pl.projekt.simplecantor.database.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.NumberFormat;
-import pl.projekt.simplecantor.utility.TypeOperation;
+import pl.projekt.simplecantor.dto.enums.TypeOperation;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
