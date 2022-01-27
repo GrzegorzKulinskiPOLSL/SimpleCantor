@@ -1,0 +1,10 @@
+<h2>
+  Obecne Kursy Walut
+</h2>
+<div *ngFor="let rate of rates">
+  <p><b>Nazwa:</b> {{rate.currencyName}}<br/>
+  <b>Kod:</b>   {{rate.currencyCode}}<br/>
+  <b>Kupno:</b>      {{rate.currencyPurchase}}<br/>
+  <b>Sprzedaż:</b>   {{rate.currencySale}}</p>
+  <br/>
+</div>

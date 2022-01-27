@@ -1,0 +1,20 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+  <div style="text-align:center">
+
+  </div>
+
+  <div class="topnav">
+   <a class="active" *ngIf="isLoggedIn"  (click)="logout()" [routerLink]="">Wyloguj</a>
+    <a class="active" *ngIf="!isLoggedIn"  [routerLink]="['/register']">Rejestrowanie</a>
+    <a class="active" *ngIf="!isLoggedIn"  [routerLink]="['/login']">Logowanie</a>
+    <a class="active" *ngIf="showAdminBoard || showUserBoard" [routerLink]="['/histories']">Historia Operacji</a>
+    <a class="active" *ngIf="showUserBoard" [routerLink]="['/exchanges']">Wymień walutę</a>
+    <a class="active" [routerLink]="['/currentRates']">Obecne Kursy</a>
+    <a class="active" *ngIf="showAdminBoard" [routerLink]="['/management']">Panel Administracyjny</a>
+  </div>
+  <div class="content">
+
+    <router-outlet></router-outlet>
+
+  </div>

@@ -1,0 +1,38 @@
+<label for="currency">Waluta <select class="form-control" id="currency" required [(ngModel)]="currency"
+                                     name="currency">
+  <option [ngValue]="undefined"></option>
+  <option *ngFor="let c of currencies" [ngValue]="c">
+    {{c.name}} {{c.currencyCode}}
+  </option>
+  <option [ngValue]="all">ALL Reszta walut</option>
+</select>
+</label>
+<form [formGroup]="addProvision" (ngSubmit)="onSubmit()">
+
+  <div *ngIf="currency !== undefined">
+    <div class="form-group">
+      <label>Sprzedaż
+        <input type="number" formControlName="ask" class="form-control"
+               [ngClass]="{'is-invalid': submitted && f.ask.errors}">
+        <div *ngIf="submitted && f.ask.errors" class="invalid-feedback">
+          <div *ngIf="f.ask.errors.min">Minimalna wartość 0.0001 %</div>
+        </div>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>Kupno
+        <input type="number" formControlName="bid" class="form-control"
+               [ngClass]="{'is-invalid': submitted && f.bid.errors}">
+        <div *ngIf="submitted && f.bid.errors" class="invalid-feedback">
+          <div *ngIf="f.bid.errors.min">Minimalna wartość 0.0001</div>
+        </div>
+      </label>
+    </div>
+    <div *ngIf="addProvision.invalid && submitted" style="color: red">Przynajmniej jedno pole musi być wypełnione</div>
+
+    <button>Dodaj</button>
+  </div>
+</form>
+
+<div *ngIf="info">{{info}}</div>

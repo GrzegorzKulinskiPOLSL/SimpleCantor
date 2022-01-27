@@ -1,0 +1,29 @@
+<label for="currency">Waluta <select class="form-control" id="currency" required [(ngModel)]="currency" name="currency">
+  <option [ngValue]="undefined"></option>
+  <option *ngFor="let c of currencies" [ngValue]="c">
+    {{c.name}} {{c.currencyCode}}
+  </option>
+</select>
+</label>
+
+<div *ngIf="refresh">
+  <div *ngIf="currency !== undefined">
+    <br/>
+    <p><label>Dane o Walucie</label></p>
+    <b>Kod:</b> {{currency.currencyCode}}<br/>
+    <b>Nazwa:</b>  {{currency.name}}<br/>
+    <b>Data dodania:</b>  {{currency.createDate}}<br/>
+  </div>
+  <br/>
+
+  <div *ngIf="currency !== undefined">
+    <p><label>Kursy:</label></p>
+    <div *ngFor="let rate of currency.exchangesRates">
+      <b>Sprzedaż:</b>  {{rate.currencySale}}<br/>
+      <b>Kupno:</b>  {{rate.currencyPurchase}}<br/>
+      <b>Data dodania:</b>  {{rate.addDate}}<br/><br/>
+    </div>
+  </div>
+
+
+</div>

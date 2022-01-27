@@ -1,0 +1,10 @@
+<h2>
+  Historia Wymian
+</h2>
+<div *ngFor="let history of historyRates">
+  <p><b>Kod:</b> {{history.currencyCode}}<br/>
+  <b>Data wymiany:</b> {{history.exchangeDate}}<br/>
+  <b>Typ operacji:</b> {{history.typeOperation}}<br/>
+  <b>Kwota:</b> {{history.amount}}<br/>
+  <b>Kurs:</b> {{history.rate}}</p><br/>
+</div>

@@ -1,0 +1,48 @@
+<label *ngIf="refresh">Waluta
+  <select class="form-control" id="currency" [(ngModel)]="currency">
+    <option [ngValue]="undefined"></option>
+    <option *ngFor="let c of currencies" [ngValue]="c">
+      {{c.name}} {{c.currencyCode}}
+    </option>
+  </select>
+</label>
+<label>
+  <button (click)="onSubmitAll()">Pobierz kursy z NBP</button>
+</label>
+
+<form [formGroup]="addRate" (ngSubmit)="onSubmit()">
+
+  <div *ngIf="currency !== undefined">
+
+    <div class="form-group">
+      <label>Sprzedaż
+        <input type="number" formControlName="currencySale" class="form-control"
+               [ngClass]="{'is-invalid': submitted && f.currencySale.errors}">
+        <div *ngIf="submitted && f.currencySale.errors" class="invalid-feedback">
+          <div *ngIf="f.currencySale.errors.required">Pole jest wymagane</div>
+          <div *ngIf="f.currencySale.errors.min">Minimalna wartość 0.0001</div>
+        </div>
+      </label>
+    </div>
+
+
+    <div class="form-group">
+      <label>Kupno
+        <input type="number" formControlName="currencyPurchase" class="form-control"
+               [ngClass]="{'is-invalid': submitted && f.currencyPurchase.errors}">
+        <div *ngIf="submitted && f.currencyPurchase.errors" class="invalid-feedback">
+          <div *ngIf="f.currencyPurchase.errors.required">Pole jest wymagane</div>
+          <div *ngIf="f.currencyPurchase.errors.min">Minimalna wartość 0.0001</div>
+        </div>
+      </label>
+    </div>
+
+    <div *ngIf="addRate.invalid && submitted" style="color: red">Błąd wartości sprzedaż niższa od zakupu</div>
+
+    <button>Dodaj</button>
+  </div>
+
+
+
+</form>
+<div *ngIf="info">{{info}}</div>

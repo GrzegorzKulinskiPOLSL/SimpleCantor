@@ -1,0 +1,71 @@
+<div>
+  <h1>Wymiana waluty</h1>
+
+
+  <div class="form-group">
+    <label for="currency">Waluta</label>
+    <select class="form-control" id="currency" required [(ngModel)]="currency" name="currency">
+      <option *ngFor="let c of currencies" [ngValue]="c">
+        {{c.currencyName}} {{c.currencyCode}}
+      </option>
+    </select>
+  </div>
+
+  <form [formGroup]="exchange" (ngSubmit)="onSubmit()">
+
+    <div *ngIf="currency !== undefined">
+      <p><label>Aktualny Kurs</label></p>
+      <b>Kupno</b> {{currency.currencyPurchase}}<br/>
+      <b>Sprzedaż</b> {{currency.currencySale}}
+      <br/>
+
+      <div class="form-group">
+        <label>Kwota
+          <input type="number" formControlName="amount" class="form-control"
+                 [ngClass]="{'is-invalid': submitted && f.amount.errors}">
+          <div *ngIf="submitted && f.amount.errors" class="invalid-feedback">
+            <div *ngIf="f.amount.errors.required">Pole jest wymagane</div>
+            <div *ngIf="f.amount.errors.min">Minimalna wartość 0.0001</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label>Kupno
+          <input type="radio" formControlName="operationType" value="SELL" class="form-control"
+                 [ngClass]="{'is-invalid': submitted && f.operationType.errors}">
+          <div *ngIf="submitted && f.operationType.errors" class="invalid-feedback">
+            <div *ngIf="f.operationType.errors.required">
+              nie wybrano -
+            </div>
+          </div>
+        </label>
+        <label>Sprzedaż
+          <input type="radio" formControlName="operationType" value="BUY" class="form-control"
+                 [ngClass]="{'is-invalid': submitted && f.operationType.errors}">
+          <div *ngIf="submitted && f.operationType.errors" class="invalid-feedback">
+            <div *ngIf="f.operationType.errors.required">
+              - typu operacji
+            </div>
+          </div>
+
+        </label>
+
+
+      </div>
+      <button>Submit</button>
+    </div>
+  </form>
+  <br/>
+  <br/>
+  <br/>
+  <div *ngIf="result !== undefined">
+    <p><label>Wynik Operacji</label></p>
+    <b>Kod waluty:</b> {{result.currencyCode}}<br/>
+    <b>Kurs:</b> {{result.rate}}<br/>
+    <b>Typ operacji:</b> {{result.typeOfOperation}}<br/>
+    <b>Wynik operacji:</b> {{result.amountGet}}<br/>
+
+  </div>
+
+</div>

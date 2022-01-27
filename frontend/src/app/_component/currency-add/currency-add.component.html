@@ -1,0 +1,36 @@
+<div>
+
+  <h1>Dodawanie nowej waluty</h1>
+  <div *ngIf="show">
+  <form [formGroup]="addCurrencyForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label>Kod waluty
+        <input type="text" formControlName="currencyCode" class="form-control"
+               [ngClass]="{'is-invalid': submitted && f.currencyCode.errors }">
+        <div *ngIf="submitted && f.currencyCode.errors" class="invalid-feedback">
+          <div *ngIf="f.currencyCode.errors.required">Pole jest wymagane</div>
+          <div *ngIf="f.currencyCode.errors.minlength">Minimum 3 litery</div>
+          <div *ngIf="f.currencyCode.errors.maxlength">Maksimum 3 litery</div>
+          <div *ngIf="f.currencyCode.errors.pattern">Tylko wielkie Litery</div>
+          <div *ngIf="f.currencyCode.errors.isInList">Istnieje w tabeli</div>
+        </div>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>Nazwa waluty
+        <input type="text" formControlName="name" class="form-control"
+               [ngClass]="{'is-invalid': submitted && f.name.errors }">
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+          <div *ngIf="f.name.errors.required">Pole jest wymagane</div>
+        </div>
+      </label>
+    </div>
+    <button>Dodaj</button>
+    <div *ngIf="info">{{info}}</div>
+
+  </form>
+  </div>
+
+</div>
